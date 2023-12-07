@@ -1,10 +1,13 @@
 import { registerPlugin } from '@capacitor/core';
 
-import type { FacebookLoginPlugin } from './definitions';
+import type { FacebookTrackingPlugin } from './definitions';
 
-const FacebookLogin = registerPlugin<FacebookLoginPlugin>('FacebookLogin', {
-  web: () => import('./web').then(m => new m.FacebookLoginWeb()),
-});
+const FacebookTracking = registerPlugin<FacebookTrackingPlugin>(
+  'FacebookTracking',
+  {
+    web: () => import('./web').then(m => new m.FacebookTrackingWeb()),
+  },
+);
 
 export * from './definitions';
-export { FacebookLogin };
+export { FacebookTracking };

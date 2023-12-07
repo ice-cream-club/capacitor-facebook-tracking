@@ -1,7 +1,7 @@
 import { registerPlugin } from '@capacitor/core';
-const FacebookLogin = registerPlugin('FacebookLogin', {
-    web: () => import('./web').then(m => new m.FacebookLoginWeb()),
+const FacebookTracking = registerPlugin('FacebookTracking', {
+    web: () => import('./web').then(m => new m.FacebookTrackingWeb()),
 });
 export * from './definitions';
-export { FacebookLogin };
+export { FacebookTracking };
 //# sourceMappingURL=index.js.map

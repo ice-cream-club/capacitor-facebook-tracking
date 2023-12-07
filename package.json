@@ -1,7 +1,7 @@
 {
-  "name": "@capacitor-community/facebook-login",
+  "name": "capacitor-facebook-tracking",
   "version": "5.0.3",
-  "description": "A native plugin for Facebook Login",
+  "description": "A native plugin for Facebook Tracking",
   "engines": {
     "node": ">=16.0.0"
   },
@@ -14,16 +14,16 @@
     "android/build.gradle",
     "dist/",
     "ios/Plugin/",
-    "CapacitorCommunityFacebookLogin.podspec"
+    "CapacitorCommunityFacebookTracking.podspec"
   ],
-  "author": "Masahiko Sakakibara <sakakibara@rdlabo.jp>",
+  "author": "Ice Cream Club",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git@github.com:capacitor-community/facebook-login.git"
+    "url": "git@github.com:ice-cream-club/capacitor-facebook-tracking.git"
   },
   "bugs": {
-    "url": "git@github.com:capacitor-community/facebook-login.git/issues"
+    "url": "git@github.com:ice-cream-club/capacitor-facebook-tracking.git/issues"
   },
   "scripts": {
     "verify": "npm run verify:ios && npm run verify:android && npm run verify:web",
@@ -35,7 +35,7 @@
     "eslint": "eslint . --ext ts",
     "prettier": "prettier \"**/*.{css,html,ts,js,java}\"",
     "swiftlint": "node-swiftlint",
-    "docgen": "docgen --api FacebookLoginPlugin --output-readme README.md --output-json dist/docs.json",
+    "docgen": "docgen --api FacebookTrackingPlugin --output-readme README.md --output-json dist/docs.json",
     "build": "npm run clean && npm run docgen && tsc && rollup -c rollup.config.js",
     "clean": "rimraf ./dist",
     "watch": "tsc --watch",

@@ -4,7 +4,7 @@ export default {
     {
       file: 'dist/plugin.js',
       format: 'iife',
-      name: 'FacebookLoginPlugin',
+      name: 'FacebookTrackingPlugin',
       globals: {
         '@capacitor/core': 'capacitorExports',
       },

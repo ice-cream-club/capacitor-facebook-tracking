@@ -1,11 +1,7 @@
 import { WebPlugin } from '@capacitor/core';
 
 import type {
-  FacebookLoginPlugin,
-  FacebookLoginResponse,
-  FacebookCurrentAccessTokenResponse,
-  FacebookGetLoginStatusResponse,
-  FacebookGetProfileResponse,
+  FacebookTrackingPlugin,
   FacebookConfiguration,
 } from './definitions';
 
@@ -17,16 +13,6 @@ declare interface Facebook {
       xfbml: boolean;
       version: string;
     }>,
-  ): void;
-
-  login(handle: (response: any) => void, options?: { scope: string }): void;
-
-  logout(handle: (response: any) => void): void;
-
-  reauthorize(handle: (response: any) => void): void;
-
-  getLoginStatus(
-    handle: (response: FacebookGetLoginStatusResponse) => void,
   ): void;
 
   api<TResponse>(path: string, callback: (response: TResponse) => void): void;
@@ -64,7 +50,10 @@ declare global {
   }
 }
 
-export class FacebookLoginWeb extends WebPlugin implements FacebookLoginPlugin {
+export class FacebookTrackingWeb
+  extends WebPlugin
+  implements FacebookTrackingPlugin
+{
   async initialize(options: Partial<FacebookConfiguration>): Promise<void> {
     const defaultOptions = { version: 'v17.0' };
     await this.loadScript(options.locale);
@@ -91,91 +80,6 @@ export class FacebookLoginWeb extends WebPlugin implements FacebookLoginPlugin {
       script.id = scriptId;
       script.src = `https://connect.facebook.net/${locale ?? 'en_US'}/sdk.js`;
       head.appendChild(script);
-    });
-  }
-
-  async login(options: {
-    permissions: string[];
-  }): Promise<FacebookLoginResponse> {
-    return new Promise<FacebookLoginResponse>((resolve, reject) => {
-      FB.login(
-        response => {
-          if (response.status === 'connected') {
-            resolve({
-              accessToken: {
-                token: response.authResponse.accessToken,
-              },
-            });
-          } else {
-            reject({
-              accessToken: {
-                token: null,
-              },
-            });
-          }
-        },
-        { scope: options.permissions.join(',') },
-      );
-    });
-  }
-
-  async logout(): Promise<void> {
-    return new Promise<void>(resolve => FB.logout(() => resolve()));
-  }
-
-  async reauthorize(): Promise<FacebookLoginResponse> {
-    return new Promise<FacebookLoginResponse>(resolve =>
-      FB.reauthorize(it => resolve(it)),
-    );
-  }
-
-  async getCurrentAccessToken(): Promise<FacebookCurrentAccessTokenResponse> {
-    return new Promise<FacebookCurrentAccessTokenResponse>(
-      (resolve, reject) => {
-        FB.getLoginStatus(response => {
-          if (response.status === 'connected') {
-            const result: FacebookCurrentAccessTokenResponse = {
-              accessToken: {
-                applicationId: undefined,
-                declinedPermissions: [],
-                expires: undefined,
-                isExpired: undefined,
-                lastRefresh: undefined,
-                permissions: [],
-                token: response.authResponse.accessToken,
-                userId: response.authResponse.userID,
-              },
-            };
-            resolve(result);
-          } else {
-            reject({
-              accessToken: {
-                token: null,
-              },
-            });
-          }
-        });
-      },
-    );
-  }
-
-  async getProfile<T extends Record<string, unknown>>(options: {
-    fields: readonly string[];
-  }): Promise<T> {
-    const fields = options.fields.join(',');
-
-    return new Promise<T>((resolve, reject) => {
-      FB.api<{ fields: string }, FacebookGetProfileResponse>(
-        '/me',
-        { fields },
-        response => {
-          if (response.error) {
-            reject(response.error.message);
-            return;
-          }
-          resolve(response as unknown as T);
-        },
-      );
     });
   }
 

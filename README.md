@@ -1,51 +1,15 @@
-<p align="center"><br><img src="https://user-images.githubusercontent.com/236501/85893648-1c92e880-b7a8-11ea-926d-95355b8175c7.png" width="128" height="128" /></p>
-<h3 align="center">Facebook Login</h3>
-<p align="center"><strong><code>@capacitor-community/facebook-login</code></strong></p>
+<h3 align="center">Facebook Tracking</h3>
+<p align="center"><strong><code>ice-cream-club/capacitor-facebook-tracking</code></strong></p>
 <p align="center">
-  Capacitor community plugin for native Facebook Login.
+  Capacitor community plugin for native Facebook tracking
 </p>
-
-<p align="center">
-  <img src="https://img.shields.io/maintenance/yes/2022?style=flat-square" />
-  <!-- <a href="https://github.com/capacitor-community/example/actions?query=workflow%3A%22CI%22"><img src="https://img.shields.io/github/workflow/status/capacitor-community/example/CI?style=flat-square" /></a> -->
-  <a href="https://www.npmjs.com/package/@capacitor-community/facebook-login"><img src="https://img.shields.io/npm/l/@capacitor-community/facebook-login?style=flat-square" /></a>
-<br>
-  <a href="https://www.npmjs.com/package/@capacitor-community/facebook-login"><img src="https://img.shields.io/npm/dw/@capacitor-community/facebook-login?style=flat-square" /></a>
-  <a href="https://www.npmjs.com/package/@capacitor-community/facebook-login"><img src="https://img.shields.io/npm/v/@capacitor-community/facebook-login?style=flat-square" /></a>
-</p>
-
-## Maintainers
-
-| Maintainer          | GitHub                                  | Social                                    | Sponsoring Company                             |
-| ------------------- | --------------------------------------- | ----------------------------------------- | ---------------------------------------------- |
-| Masahiko Sakakibara | [rdlabo](https://github.com/rdlabo)     | [@rdlabo](https://twitter.com/rdlabo)     | RELATION DESIGN LABO, GENERAL INC. ASSOCIATION |
-| Stewan Silva        | [stewones](https://github.com/stewones) | [@stewones](https://twitter.com/stewones) | [Intenseloop Inc.](https://intenseloop.com)    |
-
-## Contributors ✨
-
-<a href="https://github.com/capacitor-community/facebook-login/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=capacitor-community/facebook-login" />
-</a>
-
-Made with [contributors-img](https://contrib.rocks).
-
-## Demo
-
-[Demo code is here.](https://github.com/capacitor-community/facebook-login/tree/master/demo/angular)
 
 ## Dependency version
 
 If you want to know facebook library version, you should check:
 
-- [iOS](https://github.com/capacitor-community/facebook-login/blob/master/CapacitorCommunityFacebookLogin.podspec#L18-L19)
-- [Android](https://github.com/capacitor-community/facebook-login/blob/master/android/build.gradle#L52)
-
-## Installation
-
-```bash
-% npm i --save @capacitor-community/facebook-login
-% npx cap update
-```
+- [iOS](https://github.com/ice-cream-club/capacitor-facebook-tracking/blob/master/CapacitorCommunityFacebookTracking.podspec#L18-L19)
+- [Android](https://github.com/ice-cream-club/capacitor-facebook-tracking/blob/master/android/build.gradle#L52)
 
 ### Android configuration
 
@@ -158,10 +122,10 @@ More information can be found here: https://developers.facebook.com/docs/faceboo
 ### Web configuration
 
 ```typescript
-import { FacebookLogin } from '@capacitor-community/facebook-login';
+import { FacebookTracking } from 'capacitor-facebook-tracking';
 
 // use hook after platform dom ready
-await FacebookLogin.initialize({ appId: '105890006170720' });
+await FacebookTracking.initialize({ appId: '105890006170720' });
 ```
 
 More information can be found here: https://developers.facebook.com/docs/facebook-login/web
@@ -170,48 +134,16 @@ not same type for default web facebook login!
 
 ## Example
 
-### Login
-
-```ts
-import {
-  FacebookLogin,
-  FacebookLoginResponse,
-} from '@capacitor-community/facebook-login';
-
-const FACEBOOK_PERMISSIONS = [
-  'email',
-  'user_birthday',
-  'user_photos',
-  'user_gender',
-];
-const result = await (<FacebookLoginResponse>(
-  FacebookLogin.login({ permissions: FACEBOOK_PERMISSIONS })
-));
-
-if (result.accessToken) {
-  // Login successful.
-  console.log(`Facebook access token is ${result.accessToken.token}`);
-}
-```
-
-### Logout
-
-```ts
-import { FacebookLogin } from '@capacitor-community/facebook-login';
-
-await FacebookLogin.logout();
-```
-
 ### CurrentAccessToken
 
 ```ts
 import {
-  FacebookLogin,
-  FacebookLoginResponse,
-} from '@capacitor-community/facebook-login';
+  FacebookTracking,
+  FacebookTrackingResponse,
+} from 'capacitor-facebook-tracking';
 
-const result = await (<FacebookLoginResponse>(
-  FacebookLogin.getCurrentAccessToken()
+const result = await (<FacebookTrackingResponse>(
+  FacebookTracking.getCurrentAccessToken()
 ));
 
 if (result.accessToken) {
@@ -223,11 +155,11 @@ if (result.accessToken) {
 
 ```ts
 import {
-  FacebookLogin,
-  FacebookLoginResponse,
-} from '@capacitor-community/facebook-login';
+  FacebookTracking,
+  FacebookTrackingResponse,
+} from 'capacitor-facebook-tracking';
 
-const result = await FacebookLogin.getProfile<{
+const result = await FacebookTracking.getProfile<{
   email: string;
 }>({ fields: ['email'] });
 
@@ -239,11 +171,6 @@ console.log(`Facebook user's email is ${result.email}`);
 <docgen-index>
 
 * [`initialize(...)`](#initialize)
-* [`login(...)`](#login)
-* [`logout()`](#logout)
-* [`reauthorize()`](#reauthorize)
-* [`getCurrentAccessToken()`](#getcurrentaccesstoken)
-* [`getProfile(...)`](#getprofile)
 * [`logEvent(...)`](#logevent)
 * [`setAutoLogAppEventsEnabled(...)`](#setautologappeventsenabled)
 * [`setAdvertiserTrackingEnabled(...)`](#setadvertisertrackingenabled)
@@ -265,67 +192,6 @@ initialize(options: Partial<FacebookConfiguration>) => Promise<void>
 | Param         | Type                                                                                                          |
 | ------------- | ------------------------------------------------------------------------------------------------------------- |
 | **`options`** | <code><a href="#partial">Partial</a>&lt;<a href="#facebookconfiguration">FacebookConfiguration</a>&gt;</code> |
-
---------------------
-
-
-### login(...)
-
-```typescript
-login(options: { permissions: string[]; }) => Promise<FacebookLoginResponse>
-```
-
-| Param         | Type                                    |
-| ------------- | --------------------------------------- |
-| **`options`** | <code>{ permissions: string[]; }</code> |
-
-**Returns:** <code>Promise&lt;<a href="#facebookloginresponse">FacebookLoginResponse</a>&gt;</code>
-
---------------------
-
-
-### logout()
-
-```typescript
-logout() => Promise<void>
-```
-
---------------------
-
-
-### reauthorize()
-
-```typescript
-reauthorize() => Promise<FacebookLoginResponse>
-```
-
-**Returns:** <code>Promise&lt;<a href="#facebookloginresponse">FacebookLoginResponse</a>&gt;</code>
-
---------------------
-
-
-### getCurrentAccessToken()
-
-```typescript
-getCurrentAccessToken() => Promise<FacebookCurrentAccessTokenResponse>
-```
-
-**Returns:** <code>Promise&lt;<a href="#facebookcurrentaccesstokenresponse">FacebookCurrentAccessTokenResponse</a>&gt;</code>
-
---------------------
-
-
-### getProfile(...)
-
-```typescript
-getProfile<T extends Record<string, unknown>>(options: { fields: readonly string[]; }) => Promise<T>
-```
-
-| Param         | Type                                        |
-| ------------- | ------------------------------------------- |
-| **`options`** | <code>{ fields: readonly string[]; }</code> |
-
-**Returns:** <code>Promise&lt;T&gt;</code>
 
 --------------------
 
@@ -396,36 +262,6 @@ setAdvertiserIDCollectionEnabled(options: { enabled: boolean; }) => Promise<void
 | **`locale`**           | <code>string</code>  |
 
 
-#### FacebookLoginResponse
-
-| Prop                             | Type                                                        |
-| -------------------------------- | ----------------------------------------------------------- |
-| **`accessToken`**                | <code><a href="#accesstoken">AccessToken</a> \| null</code> |
-| **`recentlyGrantedPermissions`** | <code>string[]</code>                                       |
-| **`recentlyDeniedPermissions`**  | <code>string[]</code>                                       |
-
-
-#### AccessToken
-
-| Prop                      | Type                  |
-| ------------------------- | --------------------- |
-| **`applicationId`**       | <code>string</code>   |
-| **`declinedPermissions`** | <code>string[]</code> |
-| **`expires`**             | <code>string</code>   |
-| **`isExpired`**           | <code>boolean</code>  |
-| **`lastRefresh`**         | <code>string</code>   |
-| **`permissions`**         | <code>string[]</code> |
-| **`token`**               | <code>string</code>   |
-| **`userId`**              | <code>string</code>   |
-
-
-#### FacebookCurrentAccessTokenResponse
-
-| Prop              | Type                                                        |
-| ----------------- | ----------------------------------------------------------- |
-| **`accessToken`** | <code><a href="#accesstoken">AccessToken</a> \| null</code> |
-
-
 ### Type Aliases
 
 
@@ -434,12 +270,5 @@ setAdvertiserIDCollectionEnabled(options: { enabled: boolean; }) => Promise<void
 Make all properties in T optional
 
 <code>{ [P in keyof T]?: T[P]; }</code>
-
-
-#### Record
-
-Construct a type with a set of properties K of type T
-
-<code>{ [P in K]: T; }</code>
 
 </docgen-api>

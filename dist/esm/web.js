@@ -1,5 +1,5 @@
 import { WebPlugin } from '@capacitor/core';
-export class FacebookLoginWeb extends WebPlugin {
+export class FacebookTrackingWeb extends WebPlugin {
     async initialize(options) {
         const defaultOptions = { version: 'v17.0' };
         await this.loadScript(options.locale);
@@ -24,72 +24,6 @@ export class FacebookLoginWeb extends WebPlugin {
             script.id = scriptId;
             script.src = `https://connect.facebook.net/${locale !== null && locale !== void 0 ? locale : 'en_US'}/sdk.js`;
             head.appendChild(script);
-        });
-    }
-    async login(options) {
-        return new Promise((resolve, reject) => {
-            FB.login(response => {
-                if (response.status === 'connected') {
-                    resolve({
-                        accessToken: {
-                            token: response.authResponse.accessToken,
-                        },
-                    });
-                }
-                else {
-                    reject({
-                        accessToken: {
-                            token: null,
-                        },
-                    });
-                }
-            }, { scope: options.permissions.join(',') });
-        });
-    }
-    async logout() {
-        return new Promise(resolve => FB.logout(() => resolve()));
-    }
-    async reauthorize() {
-        return new Promise(resolve => FB.reauthorize(it => resolve(it)));
-    }
-    async getCurrentAccessToken() {
-        return new Promise((resolve, reject) => {
-            FB.getLoginStatus(response => {
-                if (response.status === 'connected') {
-                    const result = {
-                        accessToken: {
-                            applicationId: undefined,
-                            declinedPermissions: [],
-                            expires: undefined,
-                            isExpired: undefined,
-                            lastRefresh: undefined,
-                            permissions: [],
-                            token: response.authResponse.accessToken,
-                            userId: response.authResponse.userID,
-                        },
-                    };
-                    resolve(result);
-                }
-                else {
-                    reject({
-                        accessToken: {
-                            token: null,
-                        },
-                    });
-                }
-            });
-        });
-    }
-    async getProfile(options) {
-        const fields = options.fields.join(',');
-        return new Promise((resolve, reject) => {
-            FB.api('/me', { fields }, response => {
-                if (response.error) {
-                    reject(response.error.message);
-                    return;
-                }
-                resolve(response);
-            });
         });
     }
     async logEvent() {

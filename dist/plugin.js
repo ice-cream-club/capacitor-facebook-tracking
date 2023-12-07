@@ -1,11 +1,11 @@
-var FacebookLoginPlugin = (function (exports, core) {
+var FacebookTrackingPlugin = (function (exports, core) {
     'use strict';
 
-    const FacebookLogin = core.registerPlugin('FacebookLogin', {
-        web: () => Promise.resolve().then(function () { return web; }).then(m => new m.FacebookLoginWeb()),
+    const FacebookTracking = core.registerPlugin('FacebookTracking', {
+        web: () => Promise.resolve().then(function () { return web; }).then(m => new m.FacebookTrackingWeb()),
     });
 
-    class FacebookLoginWeb extends core.WebPlugin {
+    class FacebookTrackingWeb extends core.WebPlugin {
         async initialize(options) {
             const defaultOptions = { version: 'v17.0' };
             await this.loadScript(options.locale);
@@ -32,72 +32,6 @@ var FacebookLoginPlugin = (function (exports, core) {
                 head.appendChild(script);
             });
         }
-        async login(options) {
-            return new Promise((resolve, reject) => {
-                FB.login(response => {
-                    if (response.status === 'connected') {
-                        resolve({
-                            accessToken: {
-                                token: response.authResponse.accessToken,
-                            },
-                        });
-                    }
-                    else {
-                        reject({
-                            accessToken: {
-                                token: null,
-                            },
-                        });
-                    }
-                }, { scope: options.permissions.join(',') });
-            });
-        }
-        async logout() {
-            return new Promise(resolve => FB.logout(() => resolve()));
-        }
-        async reauthorize() {
-            return new Promise(resolve => FB.reauthorize(it => resolve(it)));
-        }
-        async getCurrentAccessToken() {
-            return new Promise((resolve, reject) => {
-                FB.getLoginStatus(response => {
-                    if (response.status === 'connected') {
-                        const result = {
-                            accessToken: {
-                                applicationId: undefined,
-                                declinedPermissions: [],
-                                expires: undefined,
-                                isExpired: undefined,
-                                lastRefresh: undefined,
-                                permissions: [],
-                                token: response.authResponse.accessToken,
-                                userId: response.authResponse.userID,
-                            },
-                        };
-                        resolve(result);
-                    }
-                    else {
-                        reject({
-                            accessToken: {
-                                token: null,
-                            },
-                        });
-                    }
-                });
-            });
-        }
-        async getProfile(options) {
-            const fields = options.fields.join(',');
-            return new Promise((resolve, reject) => {
-                FB.api('/me', { fields }, response => {
-                    if (response.error) {
-                        reject(response.error.message);
-                        return;
-                    }
-                    resolve(response);
-                });
-            });
-        }
         async logEvent() {
             return Promise.resolve();
         }
@@ -114,10 +48,10 @@ var FacebookLoginPlugin = (function (exports, core) {
 
     var web = /*#__PURE__*/Object.freeze({
         __proto__: null,
-        FacebookLoginWeb: FacebookLoginWeb
+        FacebookTrackingWeb: FacebookTrackingWeb
     });
 
-    exports.FacebookLogin = FacebookLogin;
+    exports.FacebookTracking = FacebookTracking;
 
     Object.defineProperty(exports, '__esModule', { value: true });
 

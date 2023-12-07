@@ -1,4 +1,4 @@
-import type { FacebookLoginPlugin } from './definitions';
-declare const FacebookLogin: FacebookLoginPlugin;
+import type { FacebookTrackingPlugin } from './definitions';
+declare const FacebookTracking: FacebookTrackingPlugin;
 export * from './definitions';
-export { FacebookLogin };
+export { FacebookTracking };
