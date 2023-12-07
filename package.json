@@ -14,7 +14,7 @@
     "android/build.gradle",
     "dist/",
     "ios/Plugin/",
-    "CapacitorCommunityFacebookTracking.podspec"
+    "CapacitorFacebookTracking.podspec"
   ],
   "author": "Ice Cream Club",
   "license": "MIT",

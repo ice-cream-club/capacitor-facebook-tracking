@@ -1,14 +1,14 @@
 <h3 align="center">Facebook Tracking</h3>
 <p align="center"><strong><code>ice-cream-club/capacitor-facebook-tracking</code></strong></p>
 <p align="center">
-  Capacitor community plugin for native Facebook tracking
+  Capacitor plugin for native Facebook tracking
 </p>
 
 ## Dependency version
 
 If you want to know facebook library version, you should check:
 
-- [iOS](https://github.com/ice-cream-club/capacitor-facebook-tracking/blob/master/CapacitorCommunityFacebookTracking.podspec#L18-L19)
+- [iOS](https://github.com/ice-cream-club/capacitor-facebook-tracking/blob/master/CapacitorFacebookTracking.podspec#L18-L19)
 - [Android](https://github.com/ice-cream-club/capacitor-facebook-tracking/blob/master/android/build.gradle#L52)
 
 ### Android configuration
