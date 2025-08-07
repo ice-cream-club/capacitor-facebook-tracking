@@ -53,8 +53,6 @@ var FacebookTrackingPlugin = (function (exports, core) {
 
     exports.FacebookTracking = FacebookTracking;
 
-    Object.defineProperty(exports, '__esModule', { value: true });
-
     return exports;
 
 })({}, capacitorExports);
