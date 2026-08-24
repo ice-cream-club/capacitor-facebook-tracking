@@ -1,6 +1,6 @@
 {
   "name": "capacitor-facebook-tracking",
-  "version": "5.0.4",
+  "version": "5.0.5",
   "description": "A native plugin for Facebook Tracking",
   "engines": {
     "node": ">=16.0.0"
@@ -43,11 +43,11 @@
     "release": "np --no-tests"
   },
   "devDependencies": {
-    "@capacitor/android": "^7.0.0",
-    "@capacitor/cli": "^7.0.0",
-    "@capacitor/core": "^7.0.0",
+    "@capacitor/android": "^8.0.0",
+    "@capacitor/cli": "^8.0.0",
+    "@capacitor/core": "^8.0.0",
     "@capacitor/docgen": "^0.3.0",
-    "@capacitor/ios": "^7.0.0",
+    "@capacitor/ios": "^8.0.0",
     "@ionic/eslint-config": "^0.4.0",
     "@ionic/prettier-config": "^4.0.0",
     "@ionic/swiftlint-config": "^2.0.0",
@@ -60,8 +60,8 @@
     "swiftlint": "^2.0.0",
     "typescript": "^5.9.2"
   },
-  "dependencies": {
-    "@capacitor/core": "^7.0.0"
+  "peerDependencies": {
+    "@capacitor/core": ">=8.0.0"
   },
   "prettier": "@ionic/prettier-config",
   "swiftlint": "@ionic/swiftlint-config",
